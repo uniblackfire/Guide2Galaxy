@@ -29,7 +29,7 @@ class TestParser(unittest.TestCase):
         # then
         self.assertIs(result, HOW_MUCH_QUESTION)
 
-    def test_parse_how_much_question(self):
+    def test_parse_how_many_question(self):
         # given
         input_data = 'how many Credits is glob prok Silver ?'
         # when
