@@ -2,9 +2,19 @@ import unittest
 
 import parser
 from constants import WORD_ROMAN_RELATION, MONEY_CREDIT_RELATION, HOW_MUCH_QUESTION, HOW_MANY_QUESTION
+from parsed_data.word_roman_relation import word_roman_relation
 
 
 class TestParser(unittest.TestCase):
+    def test_word_roman_relation_init_field(self):
+        # given
+        input_data = 'tegj is L'
+        # when
+        obj = word_roman_relation(input_data)
+        # then
+        self.assertEqual(obj.what, 'tegj')
+        self.assertEqual(obj.sth, 'L')
+
     def test_parse_word_roman_relation(self):
         # given
         input_data = 'tegj is L'
