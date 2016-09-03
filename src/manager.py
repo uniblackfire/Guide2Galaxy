@@ -1,6 +1,7 @@
 import os
 
 
+
 def read_file(filename):
     if not os.path.isfile(filename):
         return None
@@ -14,5 +15,5 @@ def read_file(filename):
 
 
 def generate_instance(input_line):
-    
+
     return None
