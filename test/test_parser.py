@@ -9,6 +9,6 @@ class TestParser(unittest.TestCase):
         # given
         input_data = 'tegj is L'
         # when
-        result = parser.parse()
+        result = parser.parse(input_data)
         # then
         self.assertIs(result, WORD_ROMAN_RELATION)
