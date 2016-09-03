@@ -8,6 +8,7 @@ from parsed_data.how_many_question import how_many_question
 from parsed_data.how_much_question import how_much_question
 from parsed_data.money_credit_relation import money_credit_relation
 from parsed_data.word_roman_relation import word_roman_relation
+from parsed_data.error import error
 
 
 class TestManager(unittest.TestCase):
@@ -42,3 +43,12 @@ class TestManager(unittest.TestCase):
         instance = manager.generate_instance(input_line)
         # then
         self.assertIsInstance(instance, how_many_question)
+
+
+    def test_generate_error_instance_accord_to_input(self):
+        # given
+        input_line = 'how much wood could a woodchuck chuck if a woodchuck could chuck wood ?'
+        # when
+        instance = manager.generate_instance(input_line)
+        # then
+        self.assertIsInstance(instance, error)
