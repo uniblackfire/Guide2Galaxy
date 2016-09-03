@@ -1,7 +1,7 @@
 import unittest
 
+import parser
 from constants import WORD_ROMAN_RELATION, MONEY_CREDIT_RELATION, HOW_MUCH_QUESTION, HOW_MANY_QUESTION
-from parsed_data import parser
 
 
 class TestParser(unittest.TestCase):

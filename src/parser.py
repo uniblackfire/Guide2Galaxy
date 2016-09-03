@@ -8,3 +8,4 @@ def parse(input_data):
     pattern = re.compile(pattern_string, re.IGNORECASE)
     if re.match(pattern, input_data):
         return WORD_ROMAN_RELATION
+
