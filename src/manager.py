@@ -11,3 +11,7 @@ def read_file(filename):
             file_content += line
 
     return file_content
+
+
+def generate_instance(input_line):
+    return None
