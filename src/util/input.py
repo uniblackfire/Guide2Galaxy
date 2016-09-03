@@ -10,7 +10,7 @@ def read_file(filename):
         for line in fd:
             file_content += line
 
-    return file_content
+    return file_content.strip()
 
 
 def get_all_input_data(url):
