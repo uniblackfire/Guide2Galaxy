@@ -1,5 +1,6 @@
 import os
 
+import parser
 
 
 def read_file(filename):
@@ -14,6 +15,9 @@ def read_file(filename):
     return file_content
 
 
-def generate_instance(input_line):
-
-    return None
+def generate_instance(input_data):
+    result = parser.parse(input_data)
+    package_name = 'parsed_data.' + result
+    class_code = __import__(package_name, fromlist=True)
+    obj = getattr(class_code, result)
+    return obj(input_data)

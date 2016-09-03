@@ -4,10 +4,10 @@ import os
 
 import file
 import src.manager as manager
-from parsed_data.how_many_question import HowManyQuestion
-from parsed_data.how_much_question import HowMuchQuestion
-from parsed_data.money_credit_relation import MoneyCreditRelation
-from parsed_data.word_roman_relation import WordRomanRelation
+from parsed_data.how_many_question import how_many_question
+from parsed_data.how_much_question import how_much_question
+from parsed_data.money_credit_relation import money_credit_relation
+from parsed_data.word_roman_relation import word_roman_relation
 
 
 class TestManager(unittest.TestCase):
@@ -25,7 +25,7 @@ class TestManager(unittest.TestCase):
         # when
         instance = manager.generate_instance(input_line)
         # then
-        self.assertIsInstance(instance, WordRomanRelation)
+        self.assertIsInstance(instance, word_roman_relation)
 
     def test_generate_money_credit_relation_instance_accord_to_input(self):
         # given
@@ -33,7 +33,7 @@ class TestManager(unittest.TestCase):
         # when
         instance = manager.generate_instance(input_line)
         # then
-        self.assertIsInstance(instance, MoneyCreditRelation)
+        self.assertIsInstance(instance, money_credit_relation)
 
     def test_generate_how_much_question_instance_accord_to_input(self):
         # given
@@ -41,7 +41,7 @@ class TestManager(unittest.TestCase):
         # when
         instance = manager.generate_instance(input_line)
         # then
-        self.assertIsInstance(instance, HowMuchQuestion)
+        self.assertIsInstance(instance, how_much_question)
 
     def test_generate_how_many_question_instance_accord_to_input(self):
         # given
@@ -49,4 +49,4 @@ class TestManager(unittest.TestCase):
         # when
         instance = manager.generate_instance(input_line)
         # then
-        self.assertIsInstance(instance, HowManyQuestion)
+        self.assertIsInstance(instance, how_many_question)
