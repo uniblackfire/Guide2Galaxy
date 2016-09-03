@@ -13,8 +13,8 @@ def read_file(filename):
     return file_content
 
 
-def get_all_input_data(URL):
-    if os.path.isfile(URL):
-        return read_file(URL)
+def get_all_input_data(url):
+    if os.path.isfile(url):
+        return read_file(url)
     else:
         return None

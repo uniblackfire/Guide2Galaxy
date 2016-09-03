@@ -19,3 +19,4 @@ def generate_instance(input_data):
 def start_process():
     filename = os.path.join(file.project_dir, 'data/input.txt')
     input_data = input_util.get_all_input_data(filename)
+
