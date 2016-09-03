@@ -19,3 +19,4 @@ def parse(input_data):
         pattern = get_re_pattern(ps[0])
         if re.match(pattern, input_data):
             return ps[1]
+    return None
