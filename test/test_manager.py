@@ -3,7 +3,7 @@ from unittest import mock
 import os
 
 import file
-import src.manager as manager
+import manager
 from parsed_data.how_many_question import how_many_question
 from parsed_data.how_much_question import how_much_question
 from parsed_data.money_credit_relation import money_credit_relation
@@ -11,14 +11,6 @@ from parsed_data.word_roman_relation import word_roman_relation
 
 
 class TestManager(unittest.TestCase):
-    def test_read_file_method(self):
-        # given
-        filename = os.path.join(file.project_dir, 'data/input.txt')
-        # when
-        content = manager.read_file(filename)
-        # then
-        self.assertIsNotNone(content)
-
     def test_generate_word_roman_number_relation_instance_accord_to_input(self):
         # given
         input_line = 'glob is I'
