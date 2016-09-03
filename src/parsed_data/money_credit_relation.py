@@ -5,7 +5,7 @@ from util import translator
 
 class money_credit_relation(IntergalacticEarthRelation):
     def __init__(self, data, word_roman_relation_list):
-        pattern = re.compile(r'(.+)\s+(\w+)\s+is\s+(\d+)\s+Credits')
+        pattern = re.compile(r'(.+)\s+(\w+)\s+is\s+(\d+)\s+Credits', re.IGNORECASE)
         m = re.match(pattern, data)
 
         self.number = translator.translate_alien_numerals_to_arabic_numerals(m.group(1), word_roman_relation_list)

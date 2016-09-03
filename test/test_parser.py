@@ -14,8 +14,8 @@ class TestParser(unittest.TestCase):
         # when
         obj = word_roman_relation(input_data)
         # then
-        self.assertEqual(obj.what, 'tegj')
-        self.assertEqual(obj.sth, 'L')
+        self.assertEqual(obj.word, 'tegj')
+        self.assertEqual(obj.roman, 'L')
 
     def test_parse_word_roman_relation(self):
         # given
