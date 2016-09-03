@@ -5,10 +5,24 @@ import os
 
 import file
 import util.input as input_util
+from parsed_data.word_roman_relation import word_roman_relation
 from util import translator
 
 
 class TestUtil(unittest.TestCase):
+    def setUp(self):
+        word_roman_relation_a = word_roman_relation('glob is I')
+        word_roman_relation_b = word_roman_relation('prok is V')
+        word_roman_relation_c = word_roman_relation('pish is X')
+        word_roman_relation_d = word_roman_relation('tegj is L')
+        self.word_roman_relation_list = [word_roman_relation_a,
+                                         word_roman_relation_b,
+                                         word_roman_relation_c,
+                                         word_roman_relation_d]
+
+    def tearDown(self):
+        pass
+
     def test_read_file_method(self):
         # given
         filename = os.path.join(file.project_dir, 'data/input.txt')
@@ -29,7 +43,7 @@ class TestUtil(unittest.TestCase):
         # given
         input_data = 'glob'
         # when
-        result = translator.translate_alien_numerals_to_arabic_numerals(input_data)
+        result = translator.translate_alien_numerals_to_arabic_numerals(input_data, self.word_roman_relation_list)
         # then
         self.assertEqual(result, 1)
 
@@ -37,7 +51,7 @@ class TestUtil(unittest.TestCase):
         # given
         input_data = 'prok'
         # when
-        result = translator.translate_alien_numerals_to_arabic_numerals(input_data)
+        result = translator.translate_alien_numerals_to_arabic_numerals(input_data, self.word_roman_relation_list)
         # then
         self.assertEqual(result, 5)
 
@@ -45,7 +59,7 @@ class TestUtil(unittest.TestCase):
         # given
         input_data = 'pish'
         # when
-        result = translator.translate_alien_numerals_to_arabic_numerals(input_data)
+        result = translator.translate_alien_numerals_to_arabic_numerals(input_data, self.word_roman_relation_list)
         # then
         self.assertEqual(result, 10)
 
@@ -53,7 +67,7 @@ class TestUtil(unittest.TestCase):
         # given
         input_data = 'tegj'
         # when
-        result = translator.translate_alien_numerals_to_arabic_numerals(input_data)
+        result = translator.translate_alien_numerals_to_arabic_numerals(input_data, self.word_roman_relation_list)
         # then
         self.assertEqual(result, 50)
 
@@ -61,7 +75,7 @@ class TestUtil(unittest.TestCase):
         # given
         input_data = 'glob glob'
         # when
-        result = translator.translate_alien_numerals_to_arabic_numerals(input_data)
+        result = translator.translate_alien_numerals_to_arabic_numerals(input_data, self.word_roman_relation_list)
         # then
         self.assertEqual(result, 2)
 
@@ -69,7 +83,7 @@ class TestUtil(unittest.TestCase):
         # given
         input_data = 'glob prok'
         # when
-        result = translator.translate_alien_numerals_to_arabic_numerals(input_data)
+        result = translator.translate_alien_numerals_to_arabic_numerals(input_data, self.word_roman_relation_list)
         # then
         self.assertEqual(result, 4)
 
@@ -77,7 +91,7 @@ class TestUtil(unittest.TestCase):
         # given
         input_data = 'pish pish'
         # when
-        result = translator.translate_alien_numerals_to_arabic_numerals(input_data)
+        result = translator.translate_alien_numerals_to_arabic_numerals(input_data, self.word_roman_relation_list)
         # then
         self.assertEqual(result, 20)
 
@@ -85,6 +99,6 @@ class TestUtil(unittest.TestCase):
         # given
         input_data = 'pish tegj glob glob'
         # when
-        result = translator.translate_alien_numerals_to_arabic_numerals(input_data)
+        result = translator.translate_alien_numerals_to_arabic_numerals(input_data, self.word_roman_relation_list)
         # then
         self.assertEqual(result, 42)
