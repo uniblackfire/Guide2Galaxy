@@ -1,4 +1,5 @@
 import unittest
+from unittest import mock
 
 import parser
 from constants import WORD_ROMAN_RELATION, MONEY_CREDIT_RELATION, HOW_MUCH_QUESTION, HOW_MANY_QUESTION
@@ -27,8 +28,10 @@ class TestParser(unittest.TestCase):
     def test_money_credit_relation_init_field(self):
         # given
         input_data = 'glob glob Silver is 34 Credits'
+        word_roman_relation_a = word_roman_relation('glob is I')
+        word_roman_relation_list = [word_roman_relation_a]
         # when
-        obj = money_credit_relation(input_data)
+        obj = money_credit_relation(input_data, word_roman_relation_list)
         # then
         self.assertEqual(obj.number, 2)
         self.assertEqual(obj.unit, 'Silver')
