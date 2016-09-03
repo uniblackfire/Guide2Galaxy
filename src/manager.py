@@ -3,6 +3,7 @@ import os
 import file
 import parser
 import util.input as input_util
+from parsed_data.word_roman_relation import word_roman_relation
 
 
 def generate_instance(input_data):
@@ -20,6 +21,9 @@ def start_process():
     filename = os.path.join(file.project_dir, 'data/input.txt')
     input_data = input_util.get_all_input_data(filename)
     data_list = input_data.split('\n')
+
+    word_roman_relation_list = list()
     for data_item in data_list:
         instance = generate_instance(data_item)
-
+        if isinstance(instance, word_roman_relation):
+            word_roman_relation_list.append(instance)
