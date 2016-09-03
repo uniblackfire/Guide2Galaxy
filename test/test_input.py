@@ -21,4 +21,4 @@ class TestInput(unittest.TestCase):
         # when
         instance = manager.generate_instance(input_line)
         # then
-        self.assertIsNone(instance)
+        self.assertIsNotNone(instance)

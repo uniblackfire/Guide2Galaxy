@@ -14,4 +14,5 @@ def read_file(filename):
 
 
 def generate_instance(input_line):
+    
     return None
