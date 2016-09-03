@@ -1,4 +1,5 @@
 import unittest
+from unittest import mock
 
 import os
 
@@ -14,3 +15,11 @@ class TestUtil(unittest.TestCase):
         content = input_util.read_file(filename)
         # then
         self.assertIsNotNone(content)
+
+    def test_get_all_input_data(self):
+        # given
+        read_file_success = mock.Mock(return_value='file content')
+        #when
+        input_util.read_file = read_file_success
+        #then
+        self.assertIsNotNone(input_util.get_all_input_data)
