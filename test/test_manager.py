@@ -10,7 +10,7 @@ from parsed_data.money_credit_relation import MoneyCreditRelation
 from parsed_data.word_roman_relation import WordRomanRelation
 
 
-class TestInput(unittest.TestCase):
+class TestManager(unittest.TestCase):
     def test_read_file_method(self):
         # given
         filename = os.path.join(file.project_dir, 'data/input.txt')
