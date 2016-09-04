@@ -5,6 +5,7 @@ from unittest.mock import patch
 import manager
 import parser
 from constants import WORD_ROMAN_RELATION, MONEY_CREDIT_RELATION, HOW_MUCH_QUESTION, HOW_MANY_QUESTION
+from parsed_data.how_many_question import how_many_question
 from parsed_data.how_much_question import how_much_question
 from parsed_data.money_credit_relation import money_credit_relation
 from parsed_data.word_roman_relation import word_roman_relation
@@ -23,6 +24,17 @@ class TestParser(unittest.TestCase):
         self.word_roman_relation_dict = dict()
         for item in word_roman_relation_list:
             self.word_roman_relation_dict[item.get_info()[0]] = item.get_info()[1]
+
+        with patch.dict(manager.word_roman_relation_dict, self.word_roman_relation_dict):
+            self.silver_credit_relation = money_credit_relation('glob glob Silver is 34 Credits')
+            self.gold_credit_relation = money_credit_relation('glob prok Gold is 57800 Credits')
+            self.iron_credit_relation = money_credit_relation('pish pish Iron is 3910 Credits')
+        money_credit_relation_list = [self.silver_credit_relation,
+                                      self.gold_credit_relation,
+                                      self.iron_credit_relation]
+        self.money_credit_relation_dict = dict()
+        for item in money_credit_relation_list:
+            self.money_credit_relation_dict[item.get_info()[0]] = item.get_info()[1]
 
     def test_word_roman_relation_init_field(self):
         # given
@@ -62,34 +74,17 @@ class TestParser(unittest.TestCase):
         self.assertEqual(obj.value, 34)
 
     def test_money_credit_relation_get_info_Silver(self):
-        # given
-        input_data = 'glob glob Silver is 34 Credits'
-        # when
-        with patch.dict(manager.word_roman_relation_dict, self.word_roman_relation_dict):
-            obj = money_credit_relation(input_data)
-        # then
-        self.assertEqual(obj.get_info()[0], 'Silver')
-        self.assertEqual(obj.get_info()[1], 34 / 2)
+        self.assertEqual(self.silver_credit_relation.get_info()[0], 'Silver')
+        self.assertEqual(self.silver_credit_relation.get_info()[1], 34 / 2)
 
     def test_money_credit_relation_get_info_Gold(self):
-        # given
-        input_data = 'glob prok Gold is 57800 Credits'
-        # when
-        with patch.dict(manager.word_roman_relation_dict, self.word_roman_relation_dict):
-            obj = money_credit_relation(input_data)
-        # then
-        self.assertEqual(obj.get_info()[0], 'Gold')
-        self.assertEqual(obj.get_info()[1], 57800 / 4)
+
+        self.assertEqual(self.gold_credit_relation.get_info()[0], 'Gold')
+        self.assertEqual(self.gold_credit_relation.get_info()[1], 57800 / 4)
 
     def test_money_credit_relation_get_info_Iron(self):
-        # given
-        input_data = 'pish pish Iron is 3910 Credits'
-        # when
-        with patch.dict(manager.word_roman_relation_dict, self.word_roman_relation_dict):
-            obj = money_credit_relation(input_data)
-        # then
-        self.assertEqual(obj.get_info()[0], 'Iron')
-        self.assertEqual(obj.get_info()[1], 3910 / 20)
+        self.assertEqual(self.iron_credit_relation.get_info()[0], 'Iron')
+        self.assertEqual(self.iron_credit_relation.get_info()[1], 3910 / 20)
 
     def test_parse_money_credit_relation(self):
         # given
@@ -115,6 +110,16 @@ class TestParser(unittest.TestCase):
         result = parser.parse(input_data)
         # then
         self.assertIs(result, HOW_MUCH_QUESTION)
+
+    def test_how_many_question_get_info(self):
+        # given
+        input_data = 'how many Credits is glob prok Silver ?'
+        # when
+        with patch.dict(manager.word_roman_relation_dict, self.word_roman_relation_dict):
+            with patch.dict(manager.money_credit_relation_dict, self.money_credit_relation_dict):
+                result = how_many_question(input_data).get_info()
+        # then
+        self.assertEqual(result, 'glob prok Silver is 68 Credits')
 
     def test_parse_how_many_question(self):
         # given

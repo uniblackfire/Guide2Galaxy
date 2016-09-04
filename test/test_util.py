@@ -6,6 +6,7 @@ import os
 import file
 import manager
 import util.input as input_util
+from parsed_data.money_credit_relation import money_credit_relation
 from parsed_data.word_roman_relation import word_roman_relation
 from util import translator, my_console
 from util.roman import getRomanNum
@@ -24,6 +25,17 @@ class TestUtil(unittest.TestCase):
         self.word_roman_relation_dict = dict()
         for item in word_roman_relation_list:
             self.word_roman_relation_dict[item.get_info()[0]] = item.get_info()[1]
+
+        with patch.dict(manager.word_roman_relation_dict, self.word_roman_relation_dict):
+            self.silver_credit_relation = money_credit_relation('glob glob Silver is 34 Credits')
+            self.gold_credit_relation = money_credit_relation('glob prok Gold is 57800 Credits')
+            self.iron_credit_relation = money_credit_relation('pish pish Iron is 3910 Credits')
+        money_credit_relation_list = [self.silver_credit_relation,
+                                      self.gold_credit_relation,
+                                      self.iron_credit_relation]
+        self.money_credit_relation_dict = dict()
+        for item in money_credit_relation_list:
+            self.money_credit_relation_dict[item.get_info()[0]] = item.get_info()[1]
 
     def tearDown(self):
         pass
@@ -181,3 +193,9 @@ class TestUtil(unittest.TestCase):
         output_data = 'this is what i want to say.'
         result = my_console.output(output_data)
         self.assertTrue(result)
+
+    def test_calc_credits(self):
+        with patch.dict(manager.word_roman_relation_dict, self.word_roman_relation_dict):
+            with patch.dict(manager.money_credit_relation_dict, self.money_credit_relation_dict):
+                result = translator.calc_credits(4, 'Silver')
+        self.assertEqual(result, 68)

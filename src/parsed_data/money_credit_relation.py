@@ -8,7 +8,7 @@ class money_credit_relation(IntergalacticEarthRelation):
         pattern = re.compile(r'(.+)\s+(\w+)\s+is\s+(\d+)\s+Credits', re.IGNORECASE)
         m = re.match(pattern, data)
 
-        self.number = translator.translate_alien_numerals_to_arabic_numerals(m.group(1))
+        self.number = translator.translate_alien_numerals_to_arabic_numerals(m.group(1).strip())
         self.unit = m.group(2)
         self.value = int(m.group(3))
 
