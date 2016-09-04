@@ -111,7 +111,7 @@ class TestParser(unittest.TestCase):
         # then
         self.assertIs(result, HOW_MUCH_QUESTION)
 
-    def test_how_many_question_get_info(self):
+    def test_how_many_question_glob_prok_Silver(self):
         # given
         input_data = 'how many Credits is glob prok Silver ?'
         # when
@@ -120,6 +120,26 @@ class TestParser(unittest.TestCase):
                 result = how_many_question(input_data).get_info()
         # then
         self.assertEqual(result, 'glob prok Silver is 68 Credits')
+
+    def test_how_many_question_glob_prok_Gold(self):
+        # given
+        input_data = 'how many Credits is glob prok Gold ?'
+        # when
+        with patch.dict(manager.word_roman_relation_dict, self.word_roman_relation_dict):
+            with patch.dict(manager.money_credit_relation_dict, self.money_credit_relation_dict):
+                result = how_many_question(input_data).get_info()
+        # then
+        self.assertEqual(result, 'glob prok Gold is 57800 Credits')
+
+    def test_how_many_question_glob_prok_Iron(self):
+        # given
+        input_data = 'how many Credits is glob prok Iron ?'
+        # when
+        with patch.dict(manager.word_roman_relation_dict, self.word_roman_relation_dict):
+            with patch.dict(manager.money_credit_relation_dict, self.money_credit_relation_dict):
+                result = how_many_question(input_data).get_info()
+        # then
+        self.assertEqual(result, 'glob prok Iron is 782 Credits')
 
     def test_parse_how_many_question(self):
         # given
