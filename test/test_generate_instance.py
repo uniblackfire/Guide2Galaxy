@@ -24,8 +24,6 @@ class TestManager(unittest.TestCase):
     def test_generate_money_credit_relation_instance_accord_to_input(self):
         # given
         input_line = 'glob glob Silver is 34 Credits'
-        word_roman_relation_a = word_roman_relation('glob is I')
-        word_roman_relation_list = [word_roman_relation_a]
         # when
         instance = generate_instance(input_line)
         # then
@@ -46,7 +44,6 @@ class TestManager(unittest.TestCase):
         instance = generate_instance(input_line)
         # then
         self.assertIsInstance(instance, how_many_question)
-
 
     def test_generate_error_instance_accord_to_input(self):
         # given
