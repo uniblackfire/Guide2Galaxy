@@ -5,6 +5,7 @@ from unittest.mock import patch
 import manager
 import parser
 from constants import WORD_ROMAN_RELATION, MONEY_CREDIT_RELATION, HOW_MUCH_QUESTION, HOW_MANY_QUESTION
+from parsed_data.how_much_question import how_much_question
 from parsed_data.money_credit_relation import money_credit_relation
 from parsed_data.word_roman_relation import word_roman_relation
 
@@ -97,6 +98,14 @@ class TestParser(unittest.TestCase):
         result = parser.parse(input_data)
         # then
         self.assertIs(result, MONEY_CREDIT_RELATION)
+
+    def test_how_much_question_get_info(self):
+        # given
+        input_data = 'how much is pish tegj glob glob ?'
+        # when
+        result = how_much_question(input_data).get_info()
+        # then
+        self.assertIs(result, 'pish tegj glob glob is 42')
 
     def test_parse_how_much_question(self):
         # given

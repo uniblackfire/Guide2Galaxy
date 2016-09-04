@@ -4,7 +4,11 @@ import file
 import parser
 import util.input as input_util
 from parsed_data.money_credit_relation import money_credit_relation
+from parsed_data.question import Question
+from parsed_data.error import error
+
 from parsed_data.word_roman_relation import word_roman_relation
+from util import my_console
 
 word_roman_relation_dict = dict()
 money_credit_relation_list = list()
@@ -29,6 +33,9 @@ def process_parsed_data_instance(instance):
     if isinstance(instance, money_credit_relation):
         global money_credit_relation_list
         money_credit_relation_list.append(instance)
+
+    if isinstance(instance, Question) or isinstance(instance, error):
+        my_console.output(instance.get_info())
 
 
 def start_process():
