@@ -32,6 +32,15 @@ class TestParser(unittest.TestCase):
         self.assertEqual(obj.word, 'tegj')
         self.assertEqual(obj.roman, 'L')
 
+    def test_word_roman_relation_get_info(self):
+        # given
+        input_data = 'tegj is L'
+        # when
+        obj = word_roman_relation(input_data)
+        # then
+        self.assertEqual(obj.get_info()[0], 'tegj')
+        self.assertEqual(obj.get_info()[1], 'L')
+
     def test_parse_word_roman_relation(self):
         # given
         input_data = 'tegj is L'
@@ -50,6 +59,36 @@ class TestParser(unittest.TestCase):
         self.assertEqual(obj.number, 2)
         self.assertEqual(obj.unit, 'Silver')
         self.assertEqual(obj.value, 34)
+
+    def test_money_credit_relation_get_info_Silver(self):
+        # given
+        input_data = 'glob glob Silver is 34 Credits'
+        # when
+        with patch.dict(manager.word_roman_relation_dict, self.word_roman_relation_dict):
+            obj = money_credit_relation(input_data)
+        # then
+        self.assertEqual(obj.get_info()[0], 'Silver')
+        self.assertEqual(obj.get_info()[1], 34 / 2)
+
+    def test_money_credit_relation_get_info_Gold(self):
+        # given
+        input_data = 'glob prok Gold is 57800 Credits'
+        # when
+        with patch.dict(manager.word_roman_relation_dict, self.word_roman_relation_dict):
+            obj = money_credit_relation(input_data)
+        # then
+        self.assertEqual(obj.get_info()[0], 'Gold')
+        self.assertEqual(obj.get_info()[1], 57800 / 4)
+
+    def test_money_credit_relation_get_info_Iron(self):
+        # given
+        input_data = 'pish pish Iron is 3910 Credits'
+        # when
+        with patch.dict(manager.word_roman_relation_dict, self.word_roman_relation_dict):
+            obj = money_credit_relation(input_data)
+        # then
+        self.assertEqual(obj.get_info()[0], 'Iron')
+        self.assertEqual(obj.get_info()[1], 3910 / 20)
 
     def test_parse_money_credit_relation(self):
         # given

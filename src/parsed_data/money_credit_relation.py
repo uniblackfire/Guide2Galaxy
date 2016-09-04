@@ -13,4 +13,4 @@ class money_credit_relation(IntergalacticEarthRelation):
         self.value = int(m.group(3))
 
     def get_info(self):
-        pass
+        return self.unit, self.value / self.number
