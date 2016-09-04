@@ -13,3 +13,5 @@ PATTERN_STRINGS = [
     (r'how\s+many\s+Credits\s+is\s+.+\?', HOW_MANY_QUESTION),
     (r'how\s+many\s+Credits\s+for\s+.+\s+(\w+)\s*\?', HOW_MANY_CREDITS_FOR_ONE_UNIT)
 ]
+
+ERROR_MSG = 'I have no idea what you are talking about'

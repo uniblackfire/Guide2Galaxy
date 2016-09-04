@@ -1,3 +1,4 @@
+import constants
 from parsed_data.parsed_abstract import Parsed
 
 
@@ -6,4 +7,4 @@ class error(Parsed):
         self.data = data
 
     def get_info(self):
-        return 'I have no idea what you are talking about'
+        return constants.ERROR_MSG
