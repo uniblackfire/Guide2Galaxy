@@ -124,7 +124,6 @@ class TestUtil(unittest.TestCase):
         self.assertEqual(result, 42)
 
     def test_getRomanNum(self):
-        # given
         roman_arabic_dict = {'I': 1,
                              'II': 2,
                              'III': 3,
@@ -175,7 +174,5 @@ class TestUtil(unittest.TestCase):
                              'MMM': 3000,
                              'MMMCCCXXXIII': 3333,
                              }
-        # when
         for k, v in roman_arabic_dict.items():
-            # then
             self.assertEqual(getRomanNum(k), v)
