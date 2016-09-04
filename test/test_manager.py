@@ -9,6 +9,7 @@ from parsed_data.how_much_question import how_much_question
 from parsed_data.money_credit_relation import money_credit_relation
 from parsed_data.word_roman_relation import word_roman_relation
 from parsed_data.error import error
+from parser import generate_instance
 
 
 class TestManager(unittest.TestCase):
@@ -16,7 +17,7 @@ class TestManager(unittest.TestCase):
         # given
         input_line = 'glob is I'
         # when
-        instance = manager.generate_instance(input_line)
+        instance = generate_instance(input_line)
         # then
         self.assertIsInstance(instance, word_roman_relation)
 
@@ -26,7 +27,7 @@ class TestManager(unittest.TestCase):
         word_roman_relation_a = word_roman_relation('glob is I')
         word_roman_relation_list = [word_roman_relation_a]
         # when
-        instance = manager.generate_instance(input_line)
+        instance = generate_instance(input_line)
         # then
         self.assertIsInstance(instance, money_credit_relation)
 
@@ -34,7 +35,7 @@ class TestManager(unittest.TestCase):
         # given
         input_line = 'how much is pish tegj glob glob ?'
         # when
-        instance = manager.generate_instance(input_line)
+        instance = generate_instance(input_line)
         # then
         self.assertIsInstance(instance, how_much_question)
 
@@ -42,7 +43,7 @@ class TestManager(unittest.TestCase):
         # given
         input_line = 'how many Credits is glob prok Silver ?'
         # when
-        instance = manager.generate_instance(input_line)
+        instance = generate_instance(input_line)
         # then
         self.assertIsInstance(instance, how_many_question)
 
@@ -51,6 +52,6 @@ class TestManager(unittest.TestCase):
         # given
         input_line = 'how much wood could a woodchuck chuck if a woodchuck could chuck wood ?'
         # when
-        instance = manager.generate_instance(input_line)
+        instance = generate_instance(input_line)
         # then
         self.assertIsInstance(instance, error)
