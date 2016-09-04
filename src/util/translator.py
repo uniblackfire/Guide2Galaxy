@@ -3,7 +3,7 @@ from util.roman import getRomanNum
 
 
 def translate_alien_numerals_to_arabic_numerals(input_data):
-    input_data = input_data.split()
+    input_data = input_data.strip().split()
 
     roman_number = ''
     for word in input_data:

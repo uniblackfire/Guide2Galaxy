@@ -103,9 +103,10 @@ class TestParser(unittest.TestCase):
         # given
         input_data = 'how much is pish tegj glob glob ?'
         # when
-        result = how_much_question(input_data).get_info()
+        with patch.dict(manager.word_roman_relation_dict, self.word_roman_relation_dict):
+            result = how_much_question(input_data).get_info()
         # then
-        self.assertIs(result, 'pish tegj glob glob is 42')
+        self.assertEqual(result, 'pish tegj glob glob is 42')
 
     def test_parse_how_much_question(self):
         # given
