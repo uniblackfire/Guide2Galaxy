@@ -5,6 +5,8 @@ import parser
 import util.input as input_util
 from parsed_data.word_roman_relation import word_roman_relation
 
+word_roman_relation_dict = dict()
+
 
 def generate_instance(input_data):
     result = parser.parse(input_data)
@@ -22,8 +24,8 @@ def start_process():
     input_data = input_util.get_all_input_data(filename)
     data_list = input_data.split('\n')
 
-    word_roman_relation_list = list()
     for data_item in data_list:
         instance = generate_instance(data_item)
         if isinstance(instance, word_roman_relation):
-            word_roman_relation_list.append(instance)
+            global word_roman_relation_dict
+            word_roman_relation_dict[instance.get_info()[0]] = instance.get_info()[1]
