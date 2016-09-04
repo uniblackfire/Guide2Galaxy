@@ -1,3 +1,4 @@
+# find class accord to the value below
 ERROR = 'error'
 WORD_ROMAN_RELATION = 'word_roman_relation'
 MONEY_CREDIT_RELATION = 'money_credit_relation'
