@@ -7,7 +7,7 @@ import file
 import manager
 import util.input as input_util
 from parsed_data.word_roman_relation import word_roman_relation
-from util import translator
+from util import translator, my_console
 from util.roman import getRomanNum
 
 
@@ -176,3 +176,8 @@ class TestUtil(unittest.TestCase):
                              }
         for k, v in roman_arabic_dict.items():
             self.assertEqual(getRomanNum(k), v)
+
+    def test_console_output(self):
+        output_data = 'this is what i want to say.'
+        result = my_console.output(output_data)
+        self.assertTrue(result)
