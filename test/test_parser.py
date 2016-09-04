@@ -5,6 +5,7 @@ from unittest.mock import patch
 import manager
 import parser
 from constants import WORD_ROMAN_RELATION, MONEY_CREDIT_RELATION, HOW_MUCH_QUESTION, HOW_MANY_QUESTION
+from parsed_data.how_many_credits_for_one_unit import how_many_credits_for_one_unit
 from parsed_data.how_many_question import how_many_question
 from parsed_data.how_much_question import how_much_question
 from parsed_data.money_credit_relation import money_credit_relation
@@ -140,6 +141,16 @@ class TestParser(unittest.TestCase):
                 result = how_many_question(input_data).get_info()
         # then
         self.assertEqual(result, 'glob prok Iron is 782 Credits')
+
+    def test_how_many_credits_for_one_unit_Silver(self):
+        # given
+        input_data = 'how many Credits for one Silver ?'
+        # when
+        with patch.dict(manager.word_roman_relation_dict, self.word_roman_relation_dict):
+            with patch.dict(manager.money_credit_relation_dict, self.money_credit_relation_dict):
+                result = how_many_credits_for_one_unit(input_data).get_info()
+        # then
+        self.assertEqual(result, 'Silver is 17 Credits')
 
     def test_parse_how_many_question(self):
         # given
