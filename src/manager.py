@@ -8,7 +8,7 @@ from parsed_data.money_credit_relation import money_credit_relation
 from parsed_data.word_roman_relation import word_roman_relation
 
 import util.input as input_util
-from util import my_console
+from util import output
 from util.translator import word_roman_relation_dict, money_credit_relation_dict
 
 
@@ -20,7 +20,7 @@ def process_parsed_data_instance(instance):
         money_credit_relation_dict[instance.get_info()[0]] = instance.get_info()[1]
 
     if isinstance(instance, Question) or isinstance(instance, error):
-        my_console.output(instance.get_info())
+        output.output(instance.get_info())
 
 
 def start_process():

@@ -8,7 +8,7 @@ import manager
 import util.input as input_util
 from parsed_data.money_credit_relation import money_credit_relation
 from parsed_data.word_roman_relation import word_roman_relation
-from util import translator, my_console
+from util import translator, output
 from util.roman import getRomanNum
 
 
@@ -191,7 +191,7 @@ class TestUtil(unittest.TestCase):
 
     def test_console_output(self):
         output_data = 'this is what i want to say.'
-        result = my_console.output(output_data)
+        result = output.output(output_data)
         self.assertTrue(result)
 
     def test_calc_credits(self):
