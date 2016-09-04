@@ -1,16 +1,15 @@
 import re
 from parsed_data.intergalactic_earth_relation import IntergalacticEarthRelation
-from util import translator
+from util import translator, regex
 
 
 class money_credit_relation(IntergalacticEarthRelation):
     def __init__(self, data):
-        pattern = re.compile(r'(.+)\s+(\w+)\s+is\s+(\d+)\s+Credits', re.IGNORECASE)
-        m = re.match(pattern, data)
-
-        self.number = translator.translate_alien_numerals_to_arabic_numerals(m.group(1).strip())
-        self.unit = m.group(2)
-        self.value = int(m.group(3))
+        groups = regex.match_to_groups(r'(.+)\s+(\w+)\s+is\s+(\d+)\s+Credits',
+                                       data, re.IGNORECASE)
+        self.number = translator.translate_alien_numerals_to_arabic_numerals(groups[0].strip())
+        self.unit = groups[1]
+        self.value = int(groups[2])
 
     def get_info(self):
         return self.unit, self.value / self.number

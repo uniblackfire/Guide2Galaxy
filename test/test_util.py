@@ -2,13 +2,14 @@ import unittest
 from unittest import mock
 from unittest.mock import patch
 import os
+import re
 
 import file
 import manager
 import util.input as input_util
 from parsed_data.money_credit_relation import money_credit_relation
 from parsed_data.word_roman_relation import word_roman_relation
-from util import translator, output
+from util import translator, output, regex
 from util.roman import getRomanNum
 
 
@@ -204,3 +205,8 @@ class TestUtil(unittest.TestCase):
         with patch.dict(translator.money_credit_relation_dict, self.money_credit_relation_dict):
             result = translator.get_credits_for_one_unit('Silver')
         self.assertEqual(result, 17)
+
+    def test_re_match_to_groups(self):
+        result = regex.match_to_groups(r"how\s+much\s+is\s+(.+?)\s*\?", "how much is pish tegj glob glob ?")
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0], 'pish tegj glob glob')
