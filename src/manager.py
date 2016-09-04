@@ -14,17 +14,6 @@ word_roman_relation_dict = dict()
 money_credit_relation_dict = dict()
 
 
-def generate_instance(input_data):
-    result = parser.parse(input_data)
-    if result:
-        package_name = 'parsed_data.' + result
-        class_code = __import__(package_name, fromlist=True)
-        obj = getattr(class_code, result)
-        return obj(input_data)
-    else:
-        return None
-
-
 def process_parsed_data_instance(instance):
     if isinstance(instance, word_roman_relation):
         global word_roman_relation_dict
@@ -44,7 +33,7 @@ def start_process():
     data_list = input_data.split('\n')
 
     for data_item in data_list:
-        instance = generate_instance(data_item)
+        instance = parser.generate_instance(data_item)
         if not instance:
             continue
         process_parsed_data_instance(instance)

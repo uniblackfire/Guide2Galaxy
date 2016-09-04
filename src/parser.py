@@ -13,3 +13,14 @@ def parse(input_data):
         if re.match(pattern, input_data):
             return ps[1]
     return ERROR
+
+
+def generate_instance(input_data):
+    result = parse(input_data)
+    if result:
+        package_name = 'parsed_data.' + result
+        class_code = __import__(package_name, fromlist=True)
+        obj = getattr(class_code, result)
+        return obj(input_data)
+    else:
+        return None
