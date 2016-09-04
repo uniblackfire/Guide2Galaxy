@@ -26,7 +26,7 @@ class TestUtil(unittest.TestCase):
         for item in word_roman_relation_list:
             self.word_roman_relation_dict[item.get_info()[0]] = item.get_info()[1]
 
-        with patch.dict(manager.word_roman_relation_dict, self.word_roman_relation_dict):
+        with patch.dict(translator.word_roman_relation_dict, self.word_roman_relation_dict):
             self.silver_credit_relation = money_credit_relation('glob glob Silver is 34 Credits')
             self.gold_credit_relation = money_credit_relation('glob prok Gold is 57800 Credits')
             self.iron_credit_relation = money_credit_relation('pish pish Iron is 3910 Credits')
@@ -60,7 +60,7 @@ class TestUtil(unittest.TestCase):
         # given
         input_data = 'glob'
         # when
-        with patch.dict(manager.word_roman_relation_dict, self.word_roman_relation_dict):
+        with patch.dict(translator.word_roman_relation_dict, self.word_roman_relation_dict):
             result = translator.translate_alien_numerals_to_arabic_numerals(input_data)
         # then
         self.assertEqual(result, 1)
@@ -69,7 +69,7 @@ class TestUtil(unittest.TestCase):
         # given
         input_data = 'prok'
         # when
-        with patch.dict(manager.word_roman_relation_dict, self.word_roman_relation_dict):
+        with patch.dict(translator.word_roman_relation_dict, self.word_roman_relation_dict):
             result = translator.translate_alien_numerals_to_arabic_numerals(input_data)
 
         # then
@@ -79,7 +79,7 @@ class TestUtil(unittest.TestCase):
         # given
         input_data = 'pish'
         # when
-        with patch.dict(manager.word_roman_relation_dict, self.word_roman_relation_dict):
+        with patch.dict(translator.word_roman_relation_dict, self.word_roman_relation_dict):
             result = translator.translate_alien_numerals_to_arabic_numerals(input_data)
 
         # then
@@ -89,7 +89,7 @@ class TestUtil(unittest.TestCase):
         # given
         input_data = 'tegj'
         # when
-        with patch.dict(manager.word_roman_relation_dict, self.word_roman_relation_dict):
+        with patch.dict(translator.word_roman_relation_dict, self.word_roman_relation_dict):
             result = translator.translate_alien_numerals_to_arabic_numerals(input_data)
 
         # then
@@ -99,7 +99,7 @@ class TestUtil(unittest.TestCase):
         # given
         input_data = 'glob glob'
         # when
-        with patch.dict(manager.word_roman_relation_dict, self.word_roman_relation_dict):
+        with patch.dict(translator.word_roman_relation_dict, self.word_roman_relation_dict):
             result = translator.translate_alien_numerals_to_arabic_numerals(input_data)
 
         # then
@@ -109,7 +109,7 @@ class TestUtil(unittest.TestCase):
         # given
         input_data = 'glob prok'
         # when
-        with patch.dict(manager.word_roman_relation_dict, self.word_roman_relation_dict):
+        with patch.dict(translator.word_roman_relation_dict, self.word_roman_relation_dict):
             result = translator.translate_alien_numerals_to_arabic_numerals(input_data)
 
         # then
@@ -119,7 +119,7 @@ class TestUtil(unittest.TestCase):
         # given
         input_data = 'pish pish'
         # when
-        with patch.dict(manager.word_roman_relation_dict, self.word_roman_relation_dict):
+        with patch.dict(translator.word_roman_relation_dict, self.word_roman_relation_dict):
             result = translator.translate_alien_numerals_to_arabic_numerals(input_data)
 
         # then
@@ -129,7 +129,7 @@ class TestUtil(unittest.TestCase):
         # given
         input_data = 'pish tegj glob glob'
         # when
-        with patch.dict(manager.word_roman_relation_dict, self.word_roman_relation_dict):
+        with patch.dict(translator.word_roman_relation_dict, self.word_roman_relation_dict):
             result = translator.translate_alien_numerals_to_arabic_numerals(input_data)
 
         # then
@@ -195,12 +195,12 @@ class TestUtil(unittest.TestCase):
         self.assertTrue(result)
 
     def test_calc_credits(self):
-        with patch.dict(manager.word_roman_relation_dict, self.word_roman_relation_dict):
-            with patch.dict(manager.money_credit_relation_dict, self.money_credit_relation_dict):
+        with patch.dict(translator.word_roman_relation_dict, self.word_roman_relation_dict):
+            with patch.dict(translator.money_credit_relation_dict, self.money_credit_relation_dict):
                 result = translator.calc_credits('glob prok', 'Silver')
         self.assertEqual(result, 68)
 
     def test_get_credits_for_one_unit(self):
-        with patch.dict(manager.money_credit_relation_dict, self.money_credit_relation_dict):
+        with patch.dict(translator.money_credit_relation_dict, self.money_credit_relation_dict):
             result = translator.get_credits_for_one_unit('Silver')
         self.assertEqual(result, 17)

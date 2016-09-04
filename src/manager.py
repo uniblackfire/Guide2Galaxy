@@ -9,15 +9,15 @@ from parsed_data.word_roman_relation import word_roman_relation
 
 import util.input as input_util
 from util import output
-from util.translator import word_roman_relation_dict, money_credit_relation_dict
+from util import translator
 
 
 def process_parsed_data_instance(instance):
     if isinstance(instance, word_roman_relation):
-        word_roman_relation_dict[instance.get_info()[0]] = instance.get_info()[1]
+        translator.word_roman_relation_dict[instance.get_info()[0]] = instance.get_info()[1]
 
     if isinstance(instance, money_credit_relation):
-        money_credit_relation_dict[instance.get_info()[0]] = instance.get_info()[1]
+        translator.money_credit_relation_dict[instance.get_info()[0]] = instance.get_info()[1]
 
     if isinstance(instance, Question) or isinstance(instance, error):
         output.output(instance.get_info())
