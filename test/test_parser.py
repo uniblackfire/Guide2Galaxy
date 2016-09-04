@@ -10,6 +10,7 @@ from parsed_data.how_many_question import how_many_question
 from parsed_data.how_much_question import how_much_question
 from parsed_data.money_credit_relation import money_credit_relation
 from parsed_data.word_roman_relation import word_roman_relation
+from util import translator
 
 
 class TestParser(unittest.TestCase):
@@ -26,7 +27,7 @@ class TestParser(unittest.TestCase):
         for item in word_roman_relation_list:
             self.word_roman_relation_dict[item.get_info()[0]] = item.get_info()[1]
 
-        with patch.dict(manager.word_roman_relation_dict, self.word_roman_relation_dict):
+        with patch.dict(translator.word_roman_relation_dict, self.word_roman_relation_dict):
             self.silver_credit_relation = money_credit_relation('glob glob Silver is 34 Credits')
             self.gold_credit_relation = money_credit_relation('glob prok Gold is 57800 Credits')
             self.iron_credit_relation = money_credit_relation('pish pish Iron is 3910 Credits')
@@ -67,7 +68,7 @@ class TestParser(unittest.TestCase):
         # given
         input_data = 'glob glob Silver is 34 Credits'
         # when
-        with patch.dict(manager.word_roman_relation_dict, self.word_roman_relation_dict):
+        with patch.dict(translator.word_roman_relation_dict, self.word_roman_relation_dict):
             obj = money_credit_relation(input_data)
         # then
         self.assertEqual(obj.number, 2)
@@ -99,7 +100,7 @@ class TestParser(unittest.TestCase):
         # given
         input_data = 'how much is pish tegj glob glob ?'
         # when
-        with patch.dict(manager.word_roman_relation_dict, self.word_roman_relation_dict):
+        with patch.dict(translator.word_roman_relation_dict, self.word_roman_relation_dict):
             result = how_much_question(input_data).get_info()
         # then
         self.assertEqual(result, 'pish tegj glob glob is 42')
@@ -116,8 +117,8 @@ class TestParser(unittest.TestCase):
         # given
         input_data = 'how many Credits is glob prok Silver ?'
         # when
-        with patch.dict(manager.word_roman_relation_dict, self.word_roman_relation_dict):
-            with patch.dict(manager.money_credit_relation_dict, self.money_credit_relation_dict):
+        with patch.dict(translator.word_roman_relation_dict, self.word_roman_relation_dict):
+            with patch.dict(translator.money_credit_relation_dict, self.money_credit_relation_dict):
                 result = how_many_question(input_data).get_info()
         # then
         self.assertEqual(result, 'glob prok Silver is 68 Credits')
@@ -126,8 +127,8 @@ class TestParser(unittest.TestCase):
         # given
         input_data = 'how many Credits is glob prok Gold ?'
         # when
-        with patch.dict(manager.word_roman_relation_dict, self.word_roman_relation_dict):
-            with patch.dict(manager.money_credit_relation_dict, self.money_credit_relation_dict):
+        with patch.dict(translator.word_roman_relation_dict, self.word_roman_relation_dict):
+            with patch.dict(translator.money_credit_relation_dict, self.money_credit_relation_dict):
                 result = how_many_question(input_data).get_info()
         # then
         self.assertEqual(result, 'glob prok Gold is 57800 Credits')
@@ -136,8 +137,8 @@ class TestParser(unittest.TestCase):
         # given
         input_data = 'how many Credits is glob prok Iron ?'
         # when
-        with patch.dict(manager.word_roman_relation_dict, self.word_roman_relation_dict):
-            with patch.dict(manager.money_credit_relation_dict, self.money_credit_relation_dict):
+        with patch.dict(translator.word_roman_relation_dict, self.word_roman_relation_dict):
+            with patch.dict(translator.money_credit_relation_dict, self.money_credit_relation_dict):
                 result = how_many_question(input_data).get_info()
         # then
         self.assertEqual(result, 'glob prok Iron is 782 Credits')
@@ -146,8 +147,8 @@ class TestParser(unittest.TestCase):
         # given
         input_data = 'how many Credits for one Silver ?'
         # when
-        with patch.dict(manager.word_roman_relation_dict, self.word_roman_relation_dict):
-            with patch.dict(manager.money_credit_relation_dict, self.money_credit_relation_dict):
+        with patch.dict(translator.word_roman_relation_dict, self.word_roman_relation_dict):
+            with patch.dict(translator.money_credit_relation_dict, self.money_credit_relation_dict):
                 result = how_many_credits_for_one_unit(input_data).get_info()
         # then
         self.assertEqual(result, 'Silver is 17 Credits')
