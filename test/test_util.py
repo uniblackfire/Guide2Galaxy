@@ -195,6 +195,7 @@ class TestUtil(unittest.TestCase):
         self.assertTrue(result)
 
     def test_calc_credits(self):
-        with patch.dict(manager.money_credit_relation_dict, self.money_credit_relation_dict):
-            result = translator.calc_credits(4, 'Silver')
+        with patch.dict(manager.word_roman_relation_dict, self.word_roman_relation_dict):
+            with patch.dict(manager.money_credit_relation_dict, self.money_credit_relation_dict):
+                result = translator.calc_credits('glob prok', 'Silver')
         self.assertEqual(result, 68)

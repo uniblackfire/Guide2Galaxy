@@ -15,5 +15,5 @@ def translate_alien_numerals_to_arabic_numerals(input_data):
     return getRomanNum(roman_number)
 
 
-def calc_credits(arabic_number, unit_name):
-    return arabic_number * manager.money_credit_relation_dict[unit_name]
+def calc_credits(alien_number, unit_name):
+    return translate_alien_numerals_to_arabic_numerals(alien_number) * manager.money_credit_relation_dict[unit_name]
