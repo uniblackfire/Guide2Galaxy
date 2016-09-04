@@ -1,8 +1,6 @@
 import unittest
-from unittest import mock
 from unittest.mock import patch
 
-import manager
 import parser
 from constants import WORD_ROMAN_RELATION, MONEY_CREDIT_RELATION, HOW_MUCH_QUESTION, HOW_MANY_QUESTION
 from parsed_data.how_many_credits_for_one_unit import how_many_credits_for_one_unit
